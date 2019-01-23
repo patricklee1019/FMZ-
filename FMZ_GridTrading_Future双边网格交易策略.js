@@ -173,7 +173,7 @@ function visuallize()
         title: '持仓信息', 
         cols: ['初始余额', '当前余额', '止损低价','止损高价','交易中轴','当前中轴'], 
         rows: [ 
-            ['16.2856',_N(account.account_rights,4),_N(center-1.5*priceInterval*orderAmount,4),_N(center+1.5*priceInterval*orderAmount,4),_N(center,4),_N(centerNow,4)],
+            [''/*账户余额*/,_N(account.account_rights,4),_N(center-1.5*priceInterval*orderAmount,4),_N(center+1.5*priceInterval*orderAmount,4),_N(center,4),_N(centerNow,4)],
             ['最后更新时间',_D(),'','','',''],
         ]
     }; 

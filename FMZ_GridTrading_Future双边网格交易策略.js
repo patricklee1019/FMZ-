@@ -1,5 +1,3 @@
-
-
 var position_long = [];
 var cover_long = [];
 var position_short = [];

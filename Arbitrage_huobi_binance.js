@@ -42,6 +42,7 @@ var checkBalanceCount=60;
 var profit;
 var maxPing = 300;
 var accountBNB;
+var minBNBAmount = 1;
 function init()
 {
     try{
@@ -131,7 +132,7 @@ function checkBNB()
 {
     accountBNB = exchanges[2].GetAccount();
     var tickerBNB = exchanges[2].GetTicker();
-    if(accountBNB.Stocks < 9)
+    if(accountBNB.Stocks < minBNBAmount)
     {
         exchanges[2].Buy(tickerBNB.Sell,1);
         return true;

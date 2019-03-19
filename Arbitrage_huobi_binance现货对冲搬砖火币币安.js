@@ -25,8 +25,8 @@ var timeBegin,timeEnd;
 var askPriceA,bidPriceA,askAmountA,bidAmountA;
 var askPriceB,bidPriceB,askAmountB,bidAmountB;
 var minAmount = 10;
-var feeA = 0.0005;
-var feeB = 0.0008;
+var feeA = 0.0005;//交易所A 的手续费 万5
+var feeB = 0.0008;//交易所B 的手续费 万8
 var fees ;
 var minProfit = 0.0005;
 var diff_A,diff_B;

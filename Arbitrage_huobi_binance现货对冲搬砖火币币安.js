@@ -1,4 +1,3 @@
-//在FMZ中第一个交易所放huobi XXX_BTC，第二个放binance XXX_BTC,第三个放BNB_BTC 手续费默认huobi 0.05%，binance 0.08%
 var chart = { // 这个 chart 在JS 语言中 是对象， 在使用Chart 函数之前我们需要声明一个配置图表的对象变量chart。
     __isStock: true,                                    // 标记是否为一般图表，有兴趣的可以改成 false 运行看看。
     tooltip: {xDateFormat: '%Y-%m-%d %H:%M:%S, %A'},    // 缩放工具
@@ -40,11 +39,12 @@ var dealAmountB=0;
 var safeAmount = 5000;
 var checkBalanceCount=60;
 var profit;
-var maxPing = 300;
+var maxTime = 300;
 var accountBNB;
-var minBNBAmount = 1;
+var reload = false;
 function init()
 {
+    
     try{
         fees = feeA + feeB;
         exchanges[0].IO("websocket");
@@ -132,7 +132,7 @@ function checkBNB()
 {
     accountBNB = exchanges[2].GetAccount();
     var tickerBNB = exchanges[2].GetTicker();
-    if(accountBNB.Stocks < minBNBAmount)
+    if(accountBNB.Stocks < 1)
     {
         exchanges[2].Buy(tickerBNB.Sell,1);
         return true;
@@ -246,6 +246,13 @@ function checkOpportunity()
     }
 }
 function main() {
+    if(reload == true)
+    {
+        initAccountA = _C(exchanges[0].GetAccount);
+        initAccountB = _C(exchanges[1].GetAccount);
+        _G("initAccountA",initAccountA);
+        _G("initAccountB",initAccountB);
+    }
     init();
     var ObjChart = Chart(chart);  // 调用 Chart 函数，初始化 图表。
     ObjChart.reset();             // 清空
@@ -260,7 +267,7 @@ function main() {
             depthA = depthA.wait();
             depthB = depthB.wait();
             timeEnd = new Date().getTime();
-            if(timeEnd - timeBegin > maxPing)continue;//延迟超过maxPing ms就放弃当组数据
+            if(timeEnd - timeBegin > maxTime)continue;//延迟超过maxTime ms就放弃当组数据
             if(depthA == null || depthB == null || accountA == null || accountB == null)continue;
             
             legalizeDepth();

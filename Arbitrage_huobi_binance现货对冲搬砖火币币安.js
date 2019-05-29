@@ -24,31 +24,41 @@ var depthA,depthB;
 var timeBegin,timeEnd;
 var askPriceA,bidPriceA,askAmountA,bidAmountA;
 var askPriceB,bidPriceB,askAmountB,bidAmountB;
-var minAmount = 10;
-var feeA = 0.0005;//交易所A 的手续费 万5
-var feeB = 0.0008;//交易所B 的手续费 万8
+var minAmount = 20;
+var feeA = 0.0007;
+var feeB = 0.0008;
 var fees ;
-var minProfit = 0.0005;
+var minProfit = 0.0004;
 var diff_A,diff_B;
 var notDealAmountA,notDealAmountB;
 var accountA,accountB;
 var initAccountA,initAccountB;
-var maxDeltaAmount= 50;
+var maxDeltaAmount= 100;
 var dealAmountA=0;
 var dealAmountB=0;
-var safeAmount = 5000;
+var safeAmount = 800;
 var checkBalanceCount=60;
 var profit;
-var maxTime = 300;
+var maxTime = 150;
 var accountBNB;
 var reload = false;
+var websocketMode = false;
 function init()
 {
     
     try{
         fees = feeA + feeB;
-        exchanges[0].IO("websocket");
-        exchanges[1].IO("websocket");
+        if(websocketMode)
+        {
+            exchanges[0].IO("websocket");
+            exchanges[1].IO("websocket");
+        }
+        else 
+        {
+            exchanges[0].IO("rest");
+            exchanges[1].IO("rest");
+        }
+        
         initAccountA = _G("initAccountA");
         initAccountB = _G("initAccountB");
         if(initAccountA == null || initAccountB == null)
@@ -271,7 +281,7 @@ function main() {
             if(depthA == null || depthB == null || accountA == null || accountB == null)continue;
             
             legalizeDepth();
-            if(checkBalanceCount > 60)
+            if(checkBalanceCount >= 60)
             {
                 checkBalanceCount = 0;
                 if(checkBalance())continue;
@@ -295,7 +305,7 @@ function main() {
                     ['收益率',_N(100*profit/(initAccountA.Balance+initAccountA.FrozenBalance+initAccountB.Balance+initAccountB.FrozenBalance),6)+'%'+'#FF0000','','','','',''],
                     ['总延迟',timeEnd - timeBegin,'','','','',''],
                     ['最后更新时间',_D(),'','','','',''],
-                    ['策略讨论或咨询加QQ:825997808','','','','',''],
+                    
                     ]
                 }; 
             LogStatus('`' + JSON.stringify(table) + '`') 
@@ -305,7 +315,7 @@ function main() {
             ObjChart.add([3,[timeEnd,fees*askPriceA]]);
             ObjChart.add([4,[timeEnd,(fees+minProfit)*askPriceA]]);
             ObjChart.update(chart);
-            Sleep(1007);
+            Sleep(317);
         }
         catch(e)
         {

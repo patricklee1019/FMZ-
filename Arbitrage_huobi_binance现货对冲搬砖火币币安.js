@@ -24,22 +24,22 @@ var depthA,depthB;
 var timeBegin,timeEnd;
 var askPriceA,bidPriceA,askAmountA,bidAmountA;
 var askPriceB,bidPriceB,askAmountB,bidAmountB;
-var minAmount = 20;
-var feeA = 0.0007;
-var feeB = 0.0008;
+var minAmount = 20;//最小下单量
+var feeA = 0.0020;//huobi 手续费0.2%，如果有点卡根据自己点卡价格修改
+var feeB = 0.0008;//binance 手续费 0.075%
 var fees ;
-var minProfit = 0.0004;
+var minProfit = 0.0004;//最小利润
 var diff_A,diff_B;
 var notDealAmountA,notDealAmountB;
 var accountA,accountB;
 var initAccountA,initAccountB;
-var maxDeltaAmount= 100;
+var maxDeltaAmount= 100;//最大可容忍币偏差，币偏差数量超过这个值将触发平衡逻辑
 var dealAmountA=0;
 var dealAmountB=0;
-var safeAmount = 800;
-var checkBalanceCount=60;
+var safeAmount = 800;//安全最大成交量
+var checkBalanceCount=60;//撤单检查时间
 var profit;
-var maxTime = 150;
+var maxTime = 150;//最大延迟过滤
 var accountBNB;
 var reload = false;
 var websocketMode = false;

@@ -1,7 +1,7 @@
 var depth,ask,bid;
 var account;
-var initBalance = 208.350;//更换你的账户balance
-var initStocks = 45.7257;//更换你的账户stocks
+var initBalance = 208.350;//更换你的钱数
+var initStocks = 45.7257;//更换你的币数
 var checkBalanceCount = 0;
 var profit = 0;
 function checkBalance()
@@ -50,7 +50,7 @@ function work()
         cols: ['初币','初钱','总币','总钱','利润'], 
         rows: [ 
             [initStocks,initBalance,_N(account.Stocks+account.FrozenStocks,3),_N(account.Balance+account.FrozenBalance,3), profit],
-            //['qq群540059246'],
+            ['qq群540059246','代码地址','https://github.com/asvenslee/FMZ-','用完记得点个星星噢',''],
         ]
     }; 
     LogStatus('`' + JSON.stringify(table) + '`') 

@@ -1,7 +1,8 @@
 var depth,ask,bid;
 var account;
-var initBalance = 208.350;
-var initStocks = 45.7257;
+var initBalance = 208.350; // 初始钱
+var initStocks = 45.7257; // 初始币
+var precision = 0.001;//    精度 最小单位
 var checkBalanceCount = 0;
 var profit = 0;
 function checkBalance()
@@ -17,7 +18,7 @@ function cancelAllOrders()
     for(var i in orders)
     {
         exchange.CancelOrder(orders[i].Id,orders[i]);
-        Sleep(500);
+        Sleep(100);
     }
   
 }
@@ -38,19 +39,19 @@ function work()
     if( (account.Stocks+account.FrozenStocks) * bid > account.Balance + account.FrozenBalance)
     {
         //stocks too much
-        bid -= 0.001;
+        bid -= 1*precision;
     }
     else 
     {
-        ask += 0.001;
+        ask += 1*precision;
     }
     if(account.Balance > 10)
     {
-        exchange.Buy(_N(bid,3),_N(10/bid,2));
+        exchange.Buy(_N(bid,3),_N(5/bid,2));
     }
     if(account.Stocks * bid > 10)
     {
-        exchange.Sell(_N(ask,3),_N(10/ask,2));
+        exchange.Sell(_N(ask,3),_N(5/ask,2));
     }
     profit = _N(account.Balance+account.FrozenBalance - initBalance + (account.Stocks+account.FrozenStocks-initStocks)*bid,3);
     var table = { 

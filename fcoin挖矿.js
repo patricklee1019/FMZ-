@@ -1,7 +1,7 @@
 var depth,ask,bid;
 var account;
-var initBalance = 208.350;
-var initStocks = 45.7257;
+var initBalance = 208.350;//更换你的账户balance
+var initStocks = 45.7257;//更换你的账户stocks
 var checkBalanceCount = 0;
 var profit = 0;
 function checkBalance()

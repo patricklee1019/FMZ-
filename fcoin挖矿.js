@@ -1,7 +1,7 @@
 var depth,ask,bid;
 var account;
-var initBalance = 208.350;//更换你的钱数
-var initStocks = 45.7257;//更换你的币数
+var initBalance = 208.350;
+var initStocks = 45.7257;
 var checkBalanceCount = 0;
 var profit = 0;
 function checkBalance()
@@ -35,13 +35,22 @@ function work()
         bid = depth.Bids[i].Price;
         break;
     }
+    if( (account.Stocks+account.FrozenStocks) * bid > account.Balance + account.FrozenBalance)
+    {
+        //stocks too much
+        bid -= 0.001;
+    }
+    else 
+    {
+        ask += 0.001;
+    }
     if(account.Balance > 10)
     {
-        exchange.Buy(bid,_N(10/bid,2));
+        exchange.Buy(_N(bid,3),_N(10/bid,2));
     }
     if(account.Stocks * bid > 10)
     {
-        exchange.Sell(ask,_N(10/ask,2));
+        exchange.Sell(_N(ask,3),_N(10/ask,2));
     }
     profit = _N(account.Balance+account.FrozenBalance - initBalance + (account.Stocks+account.FrozenStocks-initStocks)*bid,3);
     var table = { 
@@ -56,7 +65,7 @@ function work()
     LogStatus('`' + JSON.stringify(table) + '`') 
     if(checkBalanceCount <= 0)
     {
-        checkBalanceCount = 1000;
+        checkBalanceCount = 300;
         checkBalance();
     }
     else checkBalanceCount--;

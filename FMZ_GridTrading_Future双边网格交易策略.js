@@ -206,7 +206,7 @@ function visuallize()
         rows: [ 
             [initAmount,_N(account.account_rights,4),_N(center-1.2*priceInterval*orderAmount,4),_N(center+1.2*priceInterval*orderAmount,4),_N(center,4),_N(centerNow,4)],
             ['最后更新时间',_D(),'利润',_N(account.account_rights-initAmount,4),'收益率',_N((account.account_rights-initAmount)*100/initAmount,4)+'%'+'#FF0000'],
-            ['策略交流或咨询','qq:825997808','wechat:Patricklee1019','email:patricklee981019@gmail.com','telegram:@CryptoPat1019','tel:13637981861'],
+            ['策略交流','qq:825997808','wechat:Patricklee1019','email:patricklee981019@gmail.com','telegram:@CryptoPat1019',''],
         ]
     }; 
     LogStatus('`' + JSON.stringify(table) + '`');
